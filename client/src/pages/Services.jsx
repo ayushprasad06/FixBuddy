@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import api from "../services/api";
 
 function Services() {
   const [services, setServices] = useState([]);
@@ -11,13 +12,13 @@ function Services() {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await fetch("/api/services");
+        const response = await api.get("/services");
 
         if (!response.ok) {
           throw new Error("Failed to fetch services");
         }
 
-        const data = await response.json();
+        const data = response.data;
 
         setServices(data.services);
       } catch (error) {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import api from "../services/api";
 
 function ServiceDetails() {
   const { slug } = useParams();
@@ -13,13 +14,13 @@ function ServiceDetails() {
   useEffect(() => {
     const fetchService = async () => {
       try {
-        const response = await fetch(`/api/services/${slug}`);
+        const response = await api.get(`/services/${slug}`);
 
         if (!response.ok) {
           throw new Error("Service not found");
         }
 
-        const data = await response.json();
+        const data = response.data;
 
         setService(data.service);
       } catch (error) {
