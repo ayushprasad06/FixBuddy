@@ -16,6 +16,8 @@ const PORT = process.env.PORT || 5000;
 
 connectDB();
 
+app.disable("etag");
+
 app.use(cors());
 app.use(express.json());
 
