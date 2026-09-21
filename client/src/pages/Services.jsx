@@ -13,11 +13,6 @@ function Services() {
     const fetchServices = async () => {
       try {
         const response = await api.get("/services");
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch services");
-        }
-
         const data = response.data;
 
         setServices(data.services);

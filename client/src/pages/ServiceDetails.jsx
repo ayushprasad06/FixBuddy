@@ -15,11 +15,6 @@ function ServiceDetails() {
     const fetchService = async () => {
       try {
         const response = await api.get(`/services/${slug}`);
-
-        if (!response.ok) {
-          throw new Error("Service not found");
-        }
-
         const data = response.data;
 
         setService(data.service);
@@ -80,11 +75,9 @@ function ServiceDetails() {
       <Navbar />
 
       <main>
-
         {/* Hero */}
         <section className="bg-gray-950">
           <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
-
             <Link
               to="/services"
               className="text-sm font-medium text-gray-400 transition hover:text-white"
@@ -93,7 +86,6 @@ function ServiceDetails() {
             </Link>
 
             <div className="mt-10 grid items-center gap-16 lg:grid-cols-2">
-
               <div>
                 <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/10 text-3xl">
                   {service.icon}
@@ -114,13 +106,11 @@ function ServiceDetails() {
 
               {/* Booking summary */}
               <div className="rounded-3xl bg-white p-7 shadow-2xl">
-
                 <p className="text-sm font-semibold uppercase tracking-wider text-gray-400">
                   Service details
                 </p>
 
                 <div className="mt-6 grid grid-cols-2 gap-4">
-
                   <div className="rounded-2xl bg-gray-50 p-5">
                     <p className="text-xs text-gray-400">
                       Starting price
@@ -140,17 +130,14 @@ function ServiceDetails() {
                       {service.duration ?? service.estimatedDuration}
                     </p>
                   </div>
-
                 </div>
 
                 <div className="mt-6 border-t border-gray-100 pt-6">
-
                   <p className="text-sm leading-6 text-gray-500">
                     Final pricing may vary depending on the actual work
                     required. You'll be shown the booking details before
                     confirmation.
                   </p>
-
                 </div>
 
                 <Link
@@ -159,9 +146,7 @@ function ServiceDetails() {
                 >
                   Book This Service
                 </Link>
-
               </div>
-
             </div>
           </div>
         </section>
@@ -169,7 +154,6 @@ function ServiceDetails() {
         {/* What's included */}
         <section>
           <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-
             <div className="max-w-2xl">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-600">
                 What you get
@@ -186,7 +170,6 @@ function ServiceDetails() {
             </div>
 
             <div className="mt-12 grid gap-6 md:grid-cols-3">
-
               <div className="rounded-2xl border border-gray-200 p-6">
                 <div className="text-2xl">✓</div>
 
@@ -224,12 +207,9 @@ function ServiceDetails() {
                   Review your technician after the service is completed.
                 </p>
               </div>
-
             </div>
-
           </div>
         </section>
-
       </main>
 
       <Footer />
