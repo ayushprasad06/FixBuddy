@@ -50,15 +50,11 @@ function AdminDashboard() {
       ]);
 
       if (!bookingData.success) {
-        throw new Error(
-          bookingData.message || "Failed to load bookings",
-        );
+        throw new Error(bookingData.message || "Failed to load bookings");
       }
 
       if (!technicianData.success) {
-        throw new Error(
-          technicianData.message || "Failed to load technicians",
-        );
+        throw new Error(technicianData.message || "Failed to load technicians");
       }
 
       setBookings(bookingData.bookings || []);
@@ -213,9 +209,7 @@ function AdminDashboard() {
                   <select
                     id="status-filter"
                     value={statusFilter}
-                    onChange={(event) =>
-                      setStatusFilter(event.target.value)
-                    }
+                    onChange={(event) => setStatusFilter(event.target.value)}
                     className="rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
                   >
                     <option value="all">All Bookings</option>
@@ -286,19 +280,18 @@ function AdminDashboard() {
                               </div>
 
                               <p className="mt-1 text-sm text-gray-500">
-                                {booking.service?.category ||
-                                  "Home Service"}
+                                {booking.service?.category || "Home Service"}
                               </p>
                             </div>
                           </div>
 
                           <div className="lg:text-right">
                             <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">
-                              Base Price
+                              Final Total
                             </p>
 
                             <p className="mt-1 text-2xl font-bold text-gray-950">
-                              ₹{booking.price}
+                              ₹{booking.totalPrice ?? booking.price}
                             </p>
                           </div>
                         </div>
@@ -349,8 +342,7 @@ function AdminDashboard() {
                             </p>
 
                             <p className="mt-1 text-sm font-semibold text-gray-800">
-                              {booking.technician?.user?.name ||
-                                "Not Assigned"}
+                              {booking.technician?.user?.name || "Not Assigned"}
                             </p>
                           </div>
                         </div>
@@ -378,9 +370,7 @@ function AdminDashboard() {
 
                             <div className="mt-3 flex flex-col gap-3 sm:flex-row">
                               <select
-                                value={
-                                  selectedTechnicians[booking._id] || ""
-                                }
+                                value={selectedTechnicians[booking._id] || ""}
                                 onChange={(event) =>
                                   handleTechnicianChange(
                                     booking._id,
@@ -389,29 +379,22 @@ function AdminDashboard() {
                                 }
                                 className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 sm:max-w-md"
                               >
-                                <option value="">
-                                  Select technician
-                                </option>
+                                <option value="">Select technician</option>
 
-                                {compatibleTechnicians.map(
-                                  (technician) => (
-                                    <option
-                                      key={technician._id}
-                                      value={technician._id}
-                                    >
-                                      {technician.user?.name ||
-                                        "Technician"}{" "}
-                                      — {technician.experience || 0} yrs
-                                    </option>
-                                  ),
-                                )}
+                                {compatibleTechnicians.map((technician) => (
+                                  <option
+                                    key={technician._id}
+                                    value={technician._id}
+                                  >
+                                    {technician.user?.name || "Technician"} —{" "}
+                                    {technician.experience || 0} yrs
+                                  </option>
+                                ))}
                               </select>
 
                               <button
                                 type="button"
-                                onClick={() =>
-                                  handleAssign(booking._id)
-                                }
+                                onClick={() => handleAssign(booking._id)}
                                 disabled={
                                   !selectedTechnicians[booking._id] ||
                                   assigningId === booking._id
@@ -426,8 +409,7 @@ function AdminDashboard() {
 
                             {compatibleTechnicians.length === 0 && (
                               <p className="mt-3 text-sm text-amber-600">
-                                No available technician supports this
-                                service.
+                                No available technician supports this service.
                               </p>
                             )}
                           </div>
